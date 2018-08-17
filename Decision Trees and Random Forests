@@ -1,0 +1,254 @@
+----------------------------------------------
+Decision Trees:
+----------------------------------------------
+1. Decision Trees are type of supervised learning algorithm.
+2. it splits the population or sample into two or more homogeneous sets based on most significant splitter.
+
+Types of Decision Trees:
+------------------------
+1. Categorical variable decision tree:
+2. Continuous variable decision tree:
+
+Note: Advantage:Decision Trees are non-parametric method, This means that decision trees have no assumptions about the space distribution and the classifier structure.
+Disadvantage: Overfitting: the problem can be solved by setting constraints on model parameters and pruning.
+might not fit for continuous variables, decision tree looses information when it categorizes variables with different categories.
+
+
+Regression Tree Vs Classification Trees:
+---------------------------------------------
+1. Regression Trees - DV is continuous. 
+	Classification Trees - DV is categorical
+2. Regression Trees: the value obtained by terminal nodes in the training data is the mean response of observation falling in that region.
+	if an unseen observation falls in that region, we'll make its prediction with mean value.
+	Classification Trees: if an unseen observation falls in that region, we'll make its prediction as mode value.
+3. A fully grown tree is likely to overfit data, leading to poor accuracy on unseen data. Pruning is the technique used to tackle overfitting
+
+
+Decision Trees splits the nodes on all variables and then selects the split which results in most homogeneous sub-nodes.
+Algorithm selection is also based on the type of target variables.
+4- types of algorithms are used
+
+1. Gini index:
+-----------------
+Gini index says if we select two items from a population at random then they must be from same class and  probability should be 1 if the population is pure.
+
+	1. its works with DV - categorical 
+	2. it performs only binary splits
+	3. higher the value of Gini higher the homogeneity
+	4. CART uses Gini method to create binary splits
+steps to cal gini for a split:
+1. Calculate Gini for subnodes, sum of squares of probabilty of success and failure.
+2. Calculate Gini for split using weighted Gini score of each node of that split.
+
+2. Chi-Square:
+-----------------
+It is an algorithm to find out the statiscal significance between sub-nodes and parent node.
+We measure it by sum of squares of standardized differences between observed and expected frequencies of target variables.
+	1. Higher the value of Chi-Square higher the statistical significance of differences between sub-node and Parent node.
+	2. Chi-square = ((Actual – Expected)^2 / Expected)^1/2
+	3. It generates tree called CHAID (Chi-square Automatic Interaction Detector)
+
+3. Information Gain:
+-----------------
+Less impure node requires less information to describe it. 
+more impure node requires more information.
+Information theory is a measure to define this degree of disorgnization in a system known as entropy
+1. if sample is completely homogeneous, then the entropy is zero
+2. if the sample is equally divided (50-50), its entropy is one.
+
+Entropy is also used with categorical target variable. It chooses the split which has lowest entropy compared to parent node and other splits. The lesser the entropy, the better it is.
+
+4. Reduction in variance:
+----------------------
+Reduction in variance is an algorithm used for continuous target variable.
+The split with lower variance is selected as the criteria to split the population
+
+
+How to avoid overfitting in Decision trees.( using the parameters)
+------------------------------------------
+1. setting constraints on tree size.
+2. Tree pruning
+
+Parameters used for defining a tree:
+1. Minimum samples for a node split
+2. Minimum samples for a terminal node (leaf)
+3. Maximum depth of tree (vertical depth)
+4. Maximum number of terminal nodes
+5. Maximum features to consider for split
+
+Tree pruning:
+-------------
+1. We first make the decision tree to a large depth.
+2. Then we start at the bottom and start removing leaves which are giving us negative returns when compared from the top.
+3. Suppose a split is giving us a gain of say -10 (loss of 10) and then the next split on that gives us a gain of 20. A simple decision tree will stop at step 1 but in pruning, we will see that the overall gain is +10 and keep both leaves
+Python: xgboost has adopted tree pruning in their implementation.
+R: provides a function to prune
+
+which is the best to use Linear model or Tree based models:
+-------------------------------------------------------------
+1. if the Dependent variable & independent variable is well approximated by linear model- linear regression performs better than tree based model.
+2. if there is high non-linearity and complex relation between DV and IDV- tree model is better.
+3. Decision tree models are even simpler to interpret than linear regression
+
+Using Decision Trees in R and packages:
+----------------------------------------
+Package 'tree','rpart' and 'party' are used for both classification and regression (CART)
+"rpart":--
+-----------
+library(rpart)
+fit = rpart(frmla, method="class", data=raw)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+# plot tree
+plot(fit, uniform=TRUE, main="Classification Tree for Chemicals")
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+
+"tree":--
+-----------
+It has functions to prune the tree as well as general plotting functions and miss classification loss.
+library(tree)
+tr = tree(frmla, data=raw)
+summary(tr)
+plot(tr); text(tr)
+
+"party":--
+----------
+party is another package for recursive partitioning.
+key function is 'ctree()'
+# PARTY package
+library(party)
+ 
+ct = ctree(frmla, data = raw)
+#Table of prediction errors
+table(predict(ct), raw$Metal)
+ 
+# Estimated class probabilities
+tr.pred = predict(ct, newdata=raw, type="prob")
+
+-------------------------------------------------------------------
+Random Forest:
+-------------------------------------------------------------------
+To prevent the overfitting in decision trees.
+To make better predictions than individual models.
+
+Ensemble methods in tree based modeling:
+-----------------------------------
+Tree based models are not accurate and has Bias and Variance.
+Bias- How much on an average are the predicted values different from actual values.
+Variance- spread of the data points or spread of the predicted values from the actual values.
+Commonly used methods are Bagging, Boosting and Stacking.
+
+Bagging:(Bootstrap Aggregation)
+---------------
+Multiple models of same learning algorithm trained with subsets of datasets randomly picked from train data set.(with replacement).
+combine the models by vote or mean
+
+Boosting:
+---------------
+Train the model with sample random data sets, again train the model with wrong prediction with including another random sample data sets repeatedly.
+An iterative procedure, adaptively change the distribution of training data.
+	a. initially, all N records are assigned equal weights.
+	b. weights change at the end of boosting round
+this may need to overfit the model so setting constraints on the model is necessary.
+
+Stacking the algorithms models:
+-------------------------
+We can combine the predictions of multiple caret models using caretEnsemble package
+Given a list of models, the caretStack() can be used to specify a higher-order model to learn how to best combine the predictions of sub models.
+
+list of submodels:
+	1. Linear Discriminate Analysis (LDA)
+	2. Classification and Regression Trees (CART)
+	3. Logistic Regression (via Generalized Linear Model or GLM)
+	4. k-Nearest Neighbors (kNN)
+	5. Support Vector Machine with a Radial Basis Kernel Function (SVM)
+
+Stacking in R:
+-------------------------
+control <- trainControl(method="repeatedcv", number=10, repeats=3, savePredictions=TRUE, classProbs=TRUE)
+algorithmList <- c('lda', 'rpart', 'glm', 'knn', 'svmRadial')
+set.seed(seed)
+models <- caretList(Class~., data=dataset, trControl=control, methodList=algorithmList)
+results <- resamples(models)
+summary(results)
+dotplot(results)
+
+#if the predictions for the sub-models are highly correlated(>0.75) we need not combine the models.
+# correlation between results
+modelCor(results)
+splom(results)
+
+# we can combine predictor model using simple linear model
+# stack using glm
+stackControl <- trainControl(method="repeatedcv", number=10, repeats=3, savePredictions=TRUE, classProbs=TRUE)
+set.seed(seed)
+stack.glm <- caretStack(models, method="glm", metric="Accuracy", trControl=stackControl)
+print(stack.glm)
+
+# we can combine predictor model using random forest.
+# stack using random forest
+set.seed(seed)
+stack.rf <- caretStack(models, method="rf", metric="Accuracy", trControl=stackControl)
+print(stack.rf)
+
+Bagging Algorithms in R:
+-----------------------------
+1. Bagged CART
+2. Random Forest
+
+## Example of Bagging algorithms
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+seed <- 7
+metric <- "Accuracy"
+
+## Bagged CART
+set.seed(seed)
+fit.treebag <- train(Class~., data=dataset, method="treebag", metric=metric, trControl=control)
+
+## Random Forest
+set.seed(seed)
+fit.rf <- train(Class~., data=dataset, method="rf", metric=metric, trControl=control)
+
+## summarize results
+bagging_results <- resamples(list(treebag=fit.treebag, rf=fit.rf))
+summary(bagging_results)
+dotplot(bagging_results)
+
+Using Random Forests in R and packages:
+-----------------------------------------
+##################
+## randomForest
+library(randomForest)
+fit.rf = randomForest(frmla, data=raw)
+
+Boosting algorithms in R.
+----------------------
+1. C5.0
+2. Stochastic Gradient Boosting.
+
+#Both algorithms include parameters in the below example
+# Example of Boosting Algorithms
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+metric <- "Accuracy"
+seed <- 7
+
+### C5.0 
+set.seed(seed)
+fit.c50 <- train(Class~., data=dataset, method="C5.0", metric=metric, trControl=control)
+
+### Stochastic Gradient Boosting
+set.seed(seed)
+fit.gbm <- train(Class~., data=dataset, method="gbm", metric=metric, trControl=control, verbose=FALSE)
+
+# summarize results
+boosting_results <- resamples(list(c5.0=fit.c50, gbm=fit.gbm))
+summary(boosting_results)
+dotplot(boosting_results)
+
+
+
+
+
+
+

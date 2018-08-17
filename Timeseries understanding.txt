@@ -1,0 +1,83 @@
+Components of time series:
+------------------------------
+1. Trend: Long term pattern of a data distribution is known as trend
+2. Seasonal: seasonal component of time series is systematic fluctuations which repeat over a time.
+3. Random fluctuations: fluctuations that cannot be attributed to either seasonality or trend.
+4. Cyclic: occurs when data exhibits fluctuations that are tend to be longer than seasonal patterns usally at least 1-2 years.
+
+kinds of time series:
+--------------------------
+1. Additive time series: 
+	fluctuations are roughly constant.
+	fluctuations do not vary, 
+	fluctuations are roughly constant.
+	mean does not change.
+	Trend+seasonality+random fluctuations= observed time series
+2. Multiplicative time series:
+	fluctuations are not constant.
+
+plotting a time series analysis in R:
+-------------------------
+Read data in R
+Save data into object
+pass the object into a TS function
+pass the frequency of time series
+specify start of time period along with sub period.
+use plot function to plot the time series.
+Decompose function to decompose various components of a time series.
+select the modeling techniquw to use
+Build a model
+Forecast
+Validate 
+
+
+Various forcasting techniques for Time series:
+------------------------------------------
+1. Exponential smoothing.
+	More weightage to most recent observation
+2. ARIMA - 
+3. X-12 ARIMA
+4. STL
+
+
+Autocorelation: data at each time point might be influencing the data at the next time point.
+Smoothening the time series to get rid of auto correlation
+
+Validating a model:
+------------------------
+check points for validating the model.
+1. forecast values are in bell park of 95% confidence interval.
+2. MAPE is less than 7 or 7.3
+3. whether P value of Ljung-box test indicates a serial auto-correlation.
+4. if P value indicates a serial autocorrelation, check the ACF plot.
+5. check for most significant spikes in the ACF plot
+6. Whether the residuals are normally distributed, using a bell-shaped histogram(errors are equally distributed)
+
+
+holt's model will not be able to capture the seasonality
+- it can only capture the trend.
+
+holt winter's model:
+---------------------
+1. single exponential smoothening - smoothing the only random fluctuations.(alpha=T)
+2. double exponential smoothening - smoothing the random and trend.(alpha=T,Beta=T)
+3. triple exponential smoothening -	smoothing the random, trend and seasonality.(alpha=T,Beta=T,Gamma=T)
+
+Note Ljung box test:
+-----------
+1. check for auto correlation:
+	Box.test(residuals, type="Ljung-Box")
+	p-value should be insignificant that is >0.05.
+	if p-value is significant then there is a chance of autocorrelation between the time point/data points
+		so we have to perform more smoothing.
+	else the data has been smoothened and randomly distributed
+
+
+
+
+
+
+
+
+
+

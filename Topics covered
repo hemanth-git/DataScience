@@ -1,0 +1,20 @@
+1. Statistical descision making
+	a. Hypothesis testing
+	b. understanding stats txt file.
+2. Data preprocessing and exploration
+   Data preparation
+
+Machine Learning:
+---------------------
+3. Predictive analytics:
+	Predictive analytics with regression models
+	a. Linear Regression model.
+	b. Logistic Regression model.
+4. Clustering:
+	a. K-means clustering
+	b. hierarchial clustering
+5. Decision trees:(CART) (https://www.analyticsvidhya.com/blog/2016/04/complete-tutorial-tree-based-modeling-scratch-in-python/)
+	a. classification decision tree.
+	b. Regression tree.
+	(Gini index, chi-square, Information gain)
+6. Time Series forcasting:
