@@ -1,0 +1,45 @@
+paired t-test
+-----------------
+dependent samples
+before-sample and after sample
+
+H0 is same Mean0==Mean1
+1-tailed is Ha-->mean0>mean1 or mean0<mean1
+2-tailed is Ha-->mean0!=mean1
+
+Chi-square test
+----------------
+multiple proportions(region level)
+1. goodness of fit test (is the probabilty is equal else the sample is following any trend)
+2. Association test with contingency table
+
+ANOVA
+----------------
+when we have to test equality of more than 2 means we use analysis of variance
+H0--> means of the groups are same.
+Variance between the groups 
+Variance within the groups
+if variation is between the between the groups there is probably a significant effect.
+if variation is with in the groups then its probably not a significant effect.
+
+
+ANOVA- one way 
+-----
+variation with in one factor
+1. only one categorical variable or single factor is considered.
+2. comparision of means of 3 or more samples. if 2 samples then t-test is used.
+3. H0- is the equality in the means.
+4. Ha- is difference in atleast one mean.
+5. independent variables is one.
+6. compares 3 or more levels of one factor
+
+ANOVA- two way
+------
+variation with more than one factor
+replication- same no. of samples
+with out replication - different no. of samples
+1. analysis about the interaction between factors
+2. independent variables are two
+3. compares multiple levels of 2 factors.
+
+

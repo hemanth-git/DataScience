@@ -1,0 +1,33 @@
+git commands
+-------------------------
+# choose a folder using cd ../directory/
+cd ..
+
+# clone the already existing repo from git hub
+$ git clone https://github.com/hemanth-git/
+
+# to check the changes in the local repo 
+$ git status
+
+# to add the files to local stagging area use git add
+$ git add filename
+$ git add . # to add all files
+
+# use git config to config the user name and email to commit 
+$ git config --global user.name "Your Name"
+
+# use git config to config the user email id 
+$ git config --global user.email "you@example.com"
+
+# after adding the files to local stagging area use git commit to commit the files
+$ git commit -m 'commit message goes here'
+
+# use git log to show the log of the files 
+$ git log
+
+# use git push to push the files which are committed in local to the git server
+$ git push
+
+ ## additional commands
+ # use git difftool shows the difference between your local changes and previous versions
+ git difftool HEAD

@@ -1,0 +1,74 @@
+Supervised and Unsupervised learning
+--------------------------------------
+A.	Supervised Learning Algorithms: 
+	1. uses trained data set and predict on test data set
+	2. classification and regression
+	--------------------------------
+	All classification and regression algorithms come under supervised learning.
+
+	Logistic Regression
+	Decision trees
+	Support vector machine (SVM)
+	k-Nearest Neighbors
+	Naive Bayes
+	Random forest
+	Linear regression
+	polynomial regression
+	SVM for regression
+
+
+B.	Unsupervised learning algorithms:
+	1. uses input data set, used for analysis.
+	2. clustering, density estimation and dimensionality reduction.
+	------------------------------------------------------------------
+	All clustering algorithms come under unsupervised learning algorithms.
+
+	K – means clustering
+		we select the no. of groups to be formed.
+	Hierarchical clustering or bottom up clustering
+		
+	Hidden Markov models
+
+		clustering:
+		--------------------
+		clustering is a unsupervised learning (unlabeled data)
+		data points are grouped according to the features 
+		homogenity with in the group is max
+		heterogenity between the group in max
+
+
+
+Decision trees
+-----------------------------
+Decision trees are supervised learning.(having a predefined target variable)
+
+Advantages of decision trees:
+1.Most useful in data exploration, i.e if data has more variables then decision tree helps to identify the most significant table.
+2. it can handle both numeric and categorical variables.
+3. not accurate for target continous variables
+
+types of decision trees:
+1. Regression tree - dependent variable is continous
+2. Classification tree - dependent variable is categorical.
+both the decision trees follow top-down approach.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

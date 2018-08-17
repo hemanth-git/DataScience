@@ -1,0 +1,57 @@
+
+Linear regression
+
+
+R-square value tells you how much variation is explained by your model. So 0.1 R-square means that your model explains 10% of variation within the data. The greater R-square the better the model. Whereas p-value tells you about the F statistic hypothesis testing of the "fit of the intercept-only model and your model are equal". So if the p-value is less than the significance level (usually 0.05) then your model fits the data well.
+if the p-value is not significant then we conclude that the relation between the Beta coefficient and the dependent variable is not significant or x-value is not a very good influencer of y-value.
+
+R-square is proportion of variation in Y that is explained by X
+R-square increases when a new variables are added to the model
+adj R-square increases only when the significant variables are added to the model.
+
+
+OLS- ordinary least squares or least squares of the errors
+s
+Validate a model:
+---------------------
+1. R-square: higher the r-square better the model.
+2. fit-chart- Actual vs Fitted Values.
+3. MAPE: Mean Absolute percentage error: mean(Abs(Actual-predict/Actual))%, lower the Percent better the model.
+	if error is 5-10% then its a good model
+
+BLUE: Best Lineat unbiased Estimators
+
+Regression Results: Assumptions
+-------------------------------
+1. Check for linearity- plot the residuals
+	we should not see any pattern or we should see more scatter.
+2. Residuals should have constant variance - homoscedasticity.
+	we should not see any pattern in the residuals plot.
+3. Residuals should be normally distributed.
+4. Co-relation between independent variables must not be more than 40%, leads to multi colinearity
+	if the case of co-linearity tranform the variables or combine the variables.
+
+ variance inflation factor (VIF) for a model
+ a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity 
+
+Logistic Regression:
+----------------------------
+Its a binomial or categorical variable predictor:
+or Probability of the variable.
+P(Y)=B0+B1X1+e.
+Y- dependent variable
+X- independent variable
+
+we can use odds ratio: P/1-P (prob of success/prob of failure)
+i.e. log(p/1-p)= B0+B1X1+e
+
+
+
+
+
+
+
+
+
+
+
